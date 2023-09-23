@@ -1,0 +1,260 @@
+{
+  "version": "34.0.0",
+  "artifacts": {
+    "AwsMicroservicesStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AwsMicroservicesStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AwsMicroservicesStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "AwsMicroservicesStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/152ef9a71df2f99da47b7c0a6db9299f69d83b16381fbc7a6f3b9822838c8b0f.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AwsMicroservicesStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "AwsMicroservicesStack.assets"
+      ],
+      "metadata": {
+        "/AwsMicroservicesStack": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "If you are relying on AWS SDK v2 to be present in the Lambda environment already, please explicitly configure a NodeJS runtime of Node 16 or lower. [ack: @aws-cdk/aws-lambda-nodejs:sdkV2NotInRuntime]",
+            "trace": [
+              "Annotations.addMessage (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1392)",
+              "Annotations.addWarningV2 (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/aws-cdk-lib/core/lib/annotations.js:1:699)",
+              "new Bundling (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/aws-cdk-lib/aws-lambda-nodejs/lib/bundling.js:1:2562)",
+              "Function.bundle (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/aws-cdk-lib/aws-lambda-nodejs/lib/bundling.js:1:605)",
+              "new NodejsFunction (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/aws-cdk-lib/aws-lambda-nodejs/lib/function.js:1:1273)",
+              "new AwsMicroservicesStack (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/lib/aws-microservices-stack.ts:39:29)",
+              "Object.<anonymous> (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/bin/aws-microservices.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1226:14)",
+              "Module.m._compile (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/ts-node/src/index.ts:1618:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1280:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1089:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:930:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "phase4 (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/dmi/Project/Personal/aws-serverless-mc/aws-microservices/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1226:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1280:10)",
+              "Module.load (node:internal/modules/cjs/loader:1089:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:930:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "node:internal/main/run_main_module:23:47"
+            ]
+          }
+        ],
+        "/AwsMicroservicesStack/product": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "product9D4190BC"
+            }
+          }
+        ],
+        "/AwsMicroservicesStack/product/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "product9D4190BC"
+          }
+        ],
+        "/AwsMicroservicesStack/productLambdaFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productLambdaFunctionServiceRole240901B2"
+          }
+        ],
+        "/AwsMicroservicesStack/productLambdaFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productLambdaFunctionServiceRoleDefaultPolicy95D303A0"
+          }
+        ],
+        "/AwsMicroservicesStack/productLambdaFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productLambdaFunctionA3FDFB39"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiFA7EA763"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiDeployment48AF40CBdfc9802df63713555fdb9d0f36714a20"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiDeploymentStageprod17367E36"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiEndpointBFF78794"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproduct4D703983"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/GET/ApiPermission.AwsMicroservicesStackproductApi8CFD6EA0.GET..product": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductGETApiPermissionAwsMicroservicesStackproductApi8CFD6EA0GETproduct4E102617"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/GET/ApiPermission.Test.AwsMicroservicesStackproductApi8CFD6EA0.GET..product": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductGETApiPermissionTestAwsMicroservicesStackproductApi8CFD6EA0GETproduct9BB75C16"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductGET5242BAD3"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/POST/ApiPermission.AwsMicroservicesStackproductApi8CFD6EA0.POST..product": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductPOSTApiPermissionAwsMicroservicesStackproductApi8CFD6EA0POSTproduct0AA86D5F"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/POST/ApiPermission.Test.AwsMicroservicesStackproductApi8CFD6EA0.POST..product": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductPOSTApiPermissionTestAwsMicroservicesStackproductApi8CFD6EA0POSTproductE8CA5922"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductPOSTED0DDCB0"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductid52DD29BE"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/GET/ApiPermission.AwsMicroservicesStackproductApi8CFD6EA0.GET..product.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidGETApiPermissionAwsMicroservicesStackproductApi8CFD6EA0GETproductid1148F6C2"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/GET/ApiPermission.Test.AwsMicroservicesStackproductApi8CFD6EA0.GET..product.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidGETApiPermissionTestAwsMicroservicesStackproductApi8CFD6EA0GETproductidE8D260B8"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidGET79B3CB3E"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/PUT/ApiPermission.AwsMicroservicesStackproductApi8CFD6EA0.PUT..product.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidPUTApiPermissionAwsMicroservicesStackproductApi8CFD6EA0PUTproductid81B758DD"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/PUT/ApiPermission.Test.AwsMicroservicesStackproductApi8CFD6EA0.PUT..product.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidPUTApiPermissionTestAwsMicroservicesStackproductApi8CFD6EA0PUTproductid9114E78E"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidPUT751DB0EB"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/DELETE/ApiPermission.AwsMicroservicesStackproductApi8CFD6EA0.DELETE..product.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidDELETEApiPermissionAwsMicroservicesStackproductApi8CFD6EA0DELETEproductidE11F2BAD"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/DELETE/ApiPermission.Test.AwsMicroservicesStackproductApi8CFD6EA0.DELETE..product.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidDELETEApiPermissionTestAwsMicroservicesStackproductApi8CFD6EA0DELETEproductid5A5E0EC3"
+          }
+        ],
+        "/AwsMicroservicesStack/productApi/Default/product/{id}/DELETE/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "productApiproductidDELETE53DC38AA"
+          }
+        ],
+        "/AwsMicroservicesStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AwsMicroservicesStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/AwsMicroservicesStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AwsMicroservicesStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AwsMicroservicesStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
