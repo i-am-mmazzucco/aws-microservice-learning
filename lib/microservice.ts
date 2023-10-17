@@ -7,12 +7,14 @@ import { join } from "path";
 interface SwnMicroservicesProps {
   productTable: ITable;
   basketTable: ITable;
+  orderTable: ITable;
 }
 
 export class SwnMicroservices extends Construct {
 
   public readonly productMicroservice: NodejsFunction;
   public readonly basketMicroservice: NodejsFunction;
+  public readonly orderMicroservice: NodejsFunction;
 
   constructor(scope: Construct, id: string, props: SwnMicroservicesProps) {
     super(scope, id);
@@ -20,6 +22,8 @@ export class SwnMicroservices extends Construct {
     this.productMicroservice = this.createProductFunction(props.productTable);
 
     this.basketMicroservice = this.createBasketFunction(props.basketTable);
+
+    this.orderMicroservice = this.createOrderingFunction(props.orderTable);
   }
 
   private createProductFunction(productTable: ITable): NodejsFunction {
@@ -55,7 +59,10 @@ export class SwnMicroservices extends Construct {
       },
       environment: {
         PRIMARY_KEY: 'userName',
-        DYNAMODB_TABLE_NAME: basketTable.tableName
+        DYNAMODB_TABLE_NAME: basketTable.tableName,
+        EVENT_SOURCE:'com.swn.basket.checkoutbasket',
+        EVENT_DETAILTYPE: 'CheckoutBasket',
+        EVENT_BUSNAME: 'SwnEventBus'
       },
       runtime: Runtime.NODEJS_18_X
     }
@@ -66,6 +73,31 @@ export class SwnMicroservices extends Construct {
     });
 
     basketTable.grantReadWriteData(basketFunction);
+
+    return basketFunction
+  }
+
+  private createOrderingFunction(orderTable: ITable): NodejsFunction {
+    const basketFunctionProps: NodejsFunctionProps = {
+      bundling: {
+        externalModules: [
+          'aws-sdk',
+        ]
+      },
+      environment: {
+        PRIMARY_KEY: 'userName',
+        SORT_KEY: 'orderDate',
+        DYNAMODB_TABLE_NAME: orderTable.tableName
+      },
+      runtime: Runtime.NODEJS_18_X
+    }
+
+    const basketFunction = new NodejsFunction(this, 'orderingLambdaFunction', {
+      ...basketFunctionProps,
+      entry: join(__dirname, `/../src/ordering/index.js`)
+    });
+
+    orderTable.grantReadWriteData(basketFunction);
 
     return basketFunction
   }

@@ -1,6 +1,8 @@
 import { ScanCommand, GetItemCommand, PutItemCommand, DeleteItemCommand, UpdateItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { ddbClient } from "./ddbClient";
+import { ebClient } from "./eventBridgeClient";
+import { PutEventsCommand } from "@aws-sdk/client-eventbridge";
 
 exports.handler = async function(event) {
   console.log('request:', JSON.stringify(event, undefined, 2));
@@ -123,6 +125,63 @@ const deleteBasket = async (userName) => {
   }   
 }
 
-const checkoutBasket = async () => {
-  
+const checkoutBasket = async (event) => {
+  const checkoutRequest = JSON.parse(event.body);
+  if (!checkoutRequest.userName) {
+    throw new Error(`userName should exist in checkoutRequest: "${checkoutRequest}"`)
+  }
+
+  const basket = await getBasket(checkoutRequest.userName);
+
+  const checkoutPayload = prepareOrderPayload(checkoutRequest, basket);
+
+  const publishedEvent = await publishCheckoutBasketEvent(checkoutPayload);
+
+  await deleteBasket(checkoutRequest.userName);
+}
+
+const prepareOrderPayload = (checkoutRequest, basket) => {
+  try {
+    if (!basket?.items?.length) {
+      throw new Error(`basket should exist in items: "${basket}"`);
+    }
+
+    const totalPrice = basket.items.reduce((acc, item) => {
+      return acc + item.price;
+    }, 0)
+
+    const newCheckoutRequest = {
+      ...checkoutRequest,
+      totalPrice
+    }
+
+    Object.assign(newCheckoutRequest, basket);
+
+    return checkoutRequest;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+const publishCheckoutBasketEvent = async (checkoutPayload) => {
+  try {
+    const params = {
+      Entries: [
+        {
+          Source: process.env.EVENT_SOURCE,
+          Detail: JSON.stringify(checkoutPayload),
+          DetailType: process.env.EVENT_DETAILTYPE,
+          Resources: [],
+          EventBusName: process.env.EVENT_BUSNAME
+        }
+      ]
+    }
+    const data = await ebClient.send(new PutEventsCommand(params));
+
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 }
